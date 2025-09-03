@@ -1,0 +1,63 @@
+
+<html>
+<head>
+<title>Petla for</title>
+  <html lang="pl">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+   
+  <style>
+    html{
+      background-color:rgb(61, 60, 56);
+      text-align:center;
+      color:red;
+      font-size:35px;
+      font-family: "Lato", sans-serif;
+      }
+    a{
+      text-decoration:none;
+      color:white;
+      }
+    h1{
+      color:#47d6ca;
+       font-size:54px;
+  
+      }
+    </style>
+
+</head>
+<body>
+<script >
+//obliczamy sumę liczb od 1 do 100
+var suma=0
+for (var i=1;i<=100; i++)
+   suma=suma+i
+//wypisujemy ciąg liczb od 1 do 100 odzielony znakiem +
+//chcemy żeby przeszedł do nowej linijki co 10, 
+//więc badamy i
+//jeżeli i dzieli sie przez 10 to wypisujemy br
+   for (var i=1;i<=100; i++)
+    {document.write(i+"+")
+   if (i%10==0) document.write("<br>")
+  
+  }
+//po wypisaniu liczb doklejamy wynik dodawania  
+  document.write("=" + suma+"<br>")
+
+// przy mnożeniu pamiętamy że zaczynamy mnożyć od 1  
+var iloczyn=1
+for (var i=1;i<=5; i++)
+   iloczyn=iloczyn*i
+
+document.write(iloczyn)
+
+</script>
+</body>
+</html>
+
+
+
+
+
