@@ -6,94 +6,139 @@
 <title>2025/2026</title>
 
 <style>
-html{
-    background: url("hallowen.gif") no-repeat center center fixed;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    font-size: 35px;
-    font-family: "Lato", sans-serif;
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:"Lato", sans-serif;
+    background:url("hallowen.gif") no-repeat center center fixed;
+    background-size:cover;
+    overflow:hidden;
 }
 
-/* Linki */
+/* mgła */
+body::after{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.35);
+}
+
+/* panel */
+.container{
+    position:relative;
+    background:rgba(0,0,0,0.75);
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 30px rgba(0,0,0,0.7);
+    z-index:2;
+}
+
+/* zegar */
+#clock{
+    color:#ff6b6b;
+    font-size:28px;
+    margin-bottom:25px;
+    letter-spacing:3px;
+}
+
+/* przyciski */
 a{
+    display:block;
     text-decoration:none;
     color:white;
+    background:#ff3b3b;
+    margin:12px auto;
+    padding:14px;
+    width:260px;
+    border-radius:10px;
+    font-size:20px;
+    transition:0.3s;
+    box-shadow:0 0 10px #ff3b3b;
 }
 
-/* Nagłówek */
-h1{
-    color:red;
-    font-size:54px;
+a:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 25px #ff3b3b;
 }
 
-/* Panel sterowania */
-#controlBox {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 160px;
-    background: #000;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
-    z-index: 9999;
-    user-select: none;
+/* dynie */
+.pumpkin{
+    position:fixed;
+    top:-50px;
+    font-size:30px;
+    animation:fall linear infinite;
+    z-index:1;
 }
 
-/* Suwak kontrastu */
-#controlBox input[type="range"] {
-    width: 100%;
-    margin: 8px 0 12px 0;
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
 }
+
 </style>
-
 </head>
 
 <body>
 
-<h1>Nowa strona do informatyki z Panem JS</h1>
+<div class="container">
 
-<a href="index.html" target="_blank">powrót</a><br><br>
-<a href="js.html"target="_blank">zadania z js</a><br><br>
-<a href="operatory.html"target="_blank">operatory</a><br><br>
-<a href="warunki.html"target="_blank">instrukcje-ster</a><br><br>
-<a href="funkcje.html"target="_blank">funkcje</a><br><br>
-<a href="zdarzenia.html"target="_blank">zdarzenia</a><br><br>
-<a href="obiekt.html"target="_blank">obiekty</a><br><br>
-<a href="szczałkowe.html"target="_blank">funkcje strzałkowe</a><br><br>
-    <a href="dom.html"target="_blank">dom</a><br><br>
-    <a href="tablica.html"target="_blank">tabliczka mnożenia</a><br><br>
-      <a href="dom2.html"target="_blank">dom wresja 2</a><br><br>
-      <a href="  asocjacyjna.html"target="_blank">tabela asocjacyjna</a><br><br>
-  
+<div id="clock"></div>
 
-<!-- PANEL STEROWANIA -->
-<div id="controlBox">
-    <label for="contrastRange" style="font-size:14px;">Kontrast</label>
-    <input type="range" id="contrastRange" min="100" max="300" value="100">
+<a href="index.html" target="_blank">Powrót</a>
+<a href="js.html" target="_blank">Zadania z JS</a>
+<a href="operatory.html" target="_blank">Operatory</a>
+<a href="warunki.html" target="_blank">Instrukcje sterujące</a>
+<a href="funkcje.html" target="_blank">Funkcje</a>
+<a href="zdarzenia.html" target="_blank">Zdarzenia</a>
+<a href="obiekt.html" target="_blank">Obiekty</a>
+<a href="szczalkowe.html" target="_blank">Funkcje strzałkowe</a>
+<a href="dom.html" target="_blank">DOM</a>
+<a href="tablica.html" target="_blank">Tabliczka mnożenia</a>
+<a href="dom2.html" target="_blank">DOM wersja 2</a>
+<a href="asocjacyjna.html" target="_blank">Tabela asocjacyjna</a>
+
 </div>
 
 <script>
-(function() {
-    const html = document.documentElement;
-    const contrastRange = document.getElementById('contrastRange');
 
-    // SUWAK KONTRASTU
-    contrastRange.addEventListener('input', () => {
-        const val = contrastRange.value;
+/* zegar */
+function updateClock(){
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    document.getElementById("clock").innerHTML = time;
+}
 
-        html.style.filter = `contrast(${val}%)`;
+setInterval(updateClock,1000);
+updateClock();
 
-        // Przy mocnym kontraście dodaj invert
-        if (val >= 200) {
-            html.style.filter += " invert(1)";
-        }
-    });
-})();
+/* spadające dynie */
+function createPumpkin(){
+    const pumpkin = document.createElement("div");
+    pumpkin.classList.add("pumpkin");
+    pumpkin.innerHTML="🎃";
+
+    pumpkin.style.left=Math.random()*100+"vw";
+    pumpkin.style.animationDuration=(3+Math.random()*5)+"s";
+
+    document.body.appendChild(pumpkin);
+
+    setTimeout(()=>{
+        pumpkin.remove();
+    },8000);
+}
+
+setInterval(createPumpkin,600);
+
 </script>
 
 </body>
