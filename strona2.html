@@ -11,7 +11,7 @@
 
 body{
     font-family:'Inter', sans-serif;
-    background:#2c2c2c;
+    background:linear-gradient(135deg,#1f1f1f,#2c2c2c);
     margin:0;
     padding:30px;
     color:#f5f5f5;
@@ -19,7 +19,7 @@ body{
 
 /* kontener */
 .container{
-    max-width:1000px;
+    max-width:1100px;
     margin:auto;
 }
 
@@ -31,21 +31,39 @@ header{
 
 h1{
     color:#4CAF50;
-    margin:0;
 }
 
-p{
+.stats{
+    margin-top:10px;
     color:#bdbdbd;
+}
+
+/* wyszukiwarka */
+
+.search{
+    display:flex;
+    justify-content:center;
+    margin:25px 0;
+}
+
+.search input{
+    width:320px;
+    padding:10px;
+    border-radius:6px;
+    border:none;
+    background:#333;
+    color:white;
 }
 
 /* grid */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
     gap:16px;
 }
 
 /* karta */
+
 .card{
     background:#333;
     padding:20px;
@@ -56,16 +74,24 @@ p{
 }
 
 .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,0.6);
+    transform:translateY(-6px) scale(1.03);
+    box-shadow:0 10px 22px rgba(0,0,0,0.7);
 }
 
-/* link */
+/* ikonki */
+
+.icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+/* przyciski */
+
 .card a{
     text-decoration:none;
     color:white;
     background:#4CAF50;
-    padding:10px 16px;
+    padding:8px 14px;
     border-radius:6px;
     display:inline-block;
     margin-top:10px;
@@ -74,6 +100,21 @@ p{
 
 .card a:hover{
     background:#43a047;
+}
+
+/* powrót do góry */
+
+#topBtn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#4CAF50;
+    border:none;
+    color:white;
+    padding:10px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    display:none;
 }
 
 footer{
@@ -90,79 +131,87 @@ footer{
 <div class="container">
 
 <header>
-<h1>Strona z zadaniami JavaScript</h1>
-<p>Materiały z lekcji informatyki 2025 / 2026</p>
+<h1>JavaScript – materiały</h1>
+<div class="stats">Liczba tematów: <span id="count"></span></div>
 </header>
 
-<div class="grid">
-
-<div class="card">
-<h3>Zadania JS</h3>
-<a href="js.html" target="_blank">Otwórz</a>
+<div class="search">
+<input type="text" id="searchInput" placeholder="Szukaj tematu...">
 </div>
 
-<div class="card">
-<h3>Operatory</h3>
-<a href="operatory.html" target="_blank">Otwórz</a>
-</div>
+<div class="grid" id="grid">
 
-<div class="card">
-<h3>Instrukcje sterujące</h3>
-<a href="warunki.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">📘</div><h3>Zadania JS</h3><a href="js.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Funkcje</h3>
-<a href="funkcje.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">➗</div><h3>Operatory</h3><a href="operatory.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Zdarzenia</h3>
-<a href="zdarzenia.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">🔀</div><h3>Instrukcje sterujące</h3><a href="warunki.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Obiekty</h3>
-<a href="obiekt.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">⚙️</div><h3>Funkcje</h3><a href="funkcje.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Funkcje strzałkowe</h3>
-<a href="szczalkowe.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">🖱</div><h3>Zdarzenia</h3><a href="zdarzenia.html">Otwórz</a></div>
 
-<div class="card">
-<h3>DOM</h3>
-<a href="dom.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">📦</div><h3>Obiekty</h3><a href="obiekt.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Tabliczka mnożenia</h3>
-<a href="tablica.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">➡️</div><h3>Funkcje strzałkowe</h3><a href="szczalkowe.html">Otwórz</a></div>
 
-<div class="card">
-<h3>DOM wersja 2</h3>
-<a href="dom2.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">🌐</div><h3>DOM</h3><a href="dom.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Tabela asocjacyjna</h3>
-<a href="asocjacyjna.html" target="_blank">Otwórz</a>
-</div>
+<div class="card"><div class="icon">✖️</div><h3>Tabliczka mnożenia</h3><a href="tablica.html">Otwórz</a></div>
 
-<div class="card">
-<h3>Powrót</h3>
-<a href="index.html">Strona główna</a>
-</div>
+<div class="card"><div class="icon">🧩</div><h3>DOM wersja 2</h3><a href="dom2.html">Otwórz</a></div>
+
+<div class="card"><div class="icon">📊</div><h3>Tabela asocjacyjna</h3><a href="asocjacyjna.html">Otwórz</a></div>
+
+<div class="card"><div class="icon">🏠</div><h3>Powrót</h3><a href="index.html">Strona główna</a></div>
 
 </div>
 
 <footer>
-<p>Materiały do nauki JavaScript</p>
+Materiały do nauki JavaScript
 </footer>
 
 </div>
+
+<button id="topBtn">↑</button>
+
+<script>
+
+/* licznik kart */
+
+const cards=document.querySelectorAll(".card");
+document.getElementById("count").textContent=cards.length;
+
+/* wyszukiwarka */
+
+const search=document.getElementById("searchInput");
+
+search.addEventListener("keyup",function(){
+let filter=search.value.toLowerCase();
+
+cards.forEach(card=>{
+let text=card.innerText.toLowerCase();
+card.style.display=text.includes(filter)?"block":"none";
+});
+});
+
+/* przycisk góra */
+
+const topBtn=document.getElementById("topBtn");
+
+window.onscroll=function(){
+if(document.documentElement.scrollTop>200){
+topBtn.style.display="block";
+}else{
+topBtn.style.display="none";
+}
+};
+
+topBtn.onclick=function(){
+window.scrollTo({top:0,behavior:"smooth"});
+};
+
+</script>
 
 </body>
 </html>
