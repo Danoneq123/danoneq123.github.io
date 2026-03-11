@@ -2,29 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tablica asocjacyjna JS</title>
+<title>Tablica asocjacyjna</title>
+<style>
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+}
+table{
+    border-collapse:collapse;
+}
+th, td{
+    border:1px solid black;
+    padding:10px 20px;
+    text-align:center;
+}
+</style>
 </head>
 <body>
 
-<h1>Tablica asocjacyjna</h1>
-<div id="wynik"></div>
+<table id="tabela">
+<tr>
+<th>Imię</th>
+<th>Wiek</th>
+<th>Miasto</th>
+</tr>
+</table>
 
 <script>
 const osoby = {
   jan: { imie: "Jan", wiek: 25, miasto: "Warszawa" },
   anna: { imie: "Anna", wiek: 30, miasto: "Kraków" },
-  piotr: { imie: "Piotr", wiek: 22, miasto: "Gdańsk" }
+  piotr: { imie: "Piotr", wiek: 22, miasto: "Gdańsk" },
+  kasia: { imie: "Kasia", wiek: 28, miasto: "Wrocław" }
 };
 
-osoby.kasia = { imie: "Kasia", wiek: 28, miasto: "Wrocław" };
-
-let tekst = "";
+const tabela = document.getElementById("tabela");
 
 for (let k in osoby) {
-  tekst += osoby[k].imie + " " + osoby[k].wiek + " " + osoby[k].miasto + "<br>";
+  const wiersz = tabela.insertRow();
+  wiersz.insertCell().innerText = osoby[k].imie;
+  wiersz.insertCell().innerText = osoby[k].wiek;
+  wiersz.insertCell().innerText = osoby[k].miasto;
 }
-
-document.getElementById("wynik").innerHTML = tekst;
 </script>
 
 </body>
