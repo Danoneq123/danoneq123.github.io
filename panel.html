@@ -1,0 +1,25 @@
+<?php
+session_start();
+
+// sprawdzanie sesji
+if (!isset($_SESSION["user"])) {
+    header("Location: login.html");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Panel</title>
+</head>
+<body>
+
+<h2>Witaj, <?php echo $_SESSION["user"]; ?>!</h2>
+
+<p>Jesteś zalogowany ✅</p>
+
+<a href="logout.html">Wyloguj</a>
+
+</body>
+</html>
