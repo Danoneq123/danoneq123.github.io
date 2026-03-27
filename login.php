@@ -1,0 +1,45 @@
+<?php
+session_start();
+
+
+if (isset($_SESSION['user'])) {
+    header("Location: panel.php");
+    exit();
+}
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $login = $_POST["login"];
+    $haslo = $_POST["haslo"];
+
+   
+    if ($login === "admin" && $haslo === "1234") {
+        $_SESSION["user"] = $login;
+        header("Location: panel.php");
+        exit();
+    } else {
+        $error = "Zły login lub hasło!";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logowanie</title>
+</head>
+<body>
+
+<h2>Logowanie</h2>
+
+<form method="POST">
+    Login: <input type="text" name="login"><br><br>
+    Hasło: <input type="password" name="haslo"><br><br>
+    <button type="submit">Zaloguj</button>
+</form>
+
+<p style="color:red;"><?php echo $error; ?></p>
+
+</body>
+</html>
