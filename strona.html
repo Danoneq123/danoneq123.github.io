@@ -4,237 +4,248 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stacja paliw</title>
-  <link rel="stylesheet" href="styl2.css" />
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
     }
-    
+
     body {
-      margin: 0;
-      background-color: #fff;
+      background-color: white;
       color: #333;
     }
 
     header, footer {
       background-color: red;
       color: white;
-      padding: 20px;
       text-align: center;
-      font-size: 1.6rem;
+      padding: 20px;
     }
 
     nav {
-      background-color: #000;
-      padding: 15px;
+      background-color: black;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
     }
 
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 10px;
-      font-size: 1.1rem;
     }
 
     nav a:hover {
-      color: #ffeb3b;
+      color: yellow;
     }
 
     main {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      gap: 20px;
       padding: 20px;
+    }
+
+    #lewy, #prawy {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+      border-radius: 10px;
     }
 
     #lewy {
-      flex: 1;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     #prawy {
-      flex: 1;
       background-color: red;
-      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 8px;
     }
 
-    #samochod {
+    img {
       max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      transition: transform 0.3s;
-    }
-
-    #samochod:hover {
-      transform: scale(1.05);
-      border: 2px solid #ffeb3b;
+      border-radius: 10px;
     }
 
     h2 {
-      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .auto {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
       margin-bottom: 20px;
     }
 
-    form label {
+    label {
       display: block;
-      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
-    form select, form input[type="number"] {
+    input, select {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0 20px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
+      padding: 10px;
+      margin-top: 5px;
     }
 
     button {
+      margin-top: 20px;
+      padding: 12px 20px;
       background-color: black;
       color: white;
-      padding: 12px 20px;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
-      font-size: 1.2rem;
-      transition: background-color 0.3s;
+      font-size: 18px;
+      border-radius: 5px;
     }
 
     button:hover {
-      background-color: #2e7d32;
+      background-color: green;
     }
 
-    footer {
-      margin-top: 30px;
-    }
-
-    /* Responsywność */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      main {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      #lewy, #prawy {
-        width: 100%;
-        margin-bottom: 20px;
-      }
+    #wynik, #podsumowanie {
+      margin-top: 20px;
+      font-size: 18px;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Całodobowa stacja paliw</h1>
-  </header>
 
-  <nav>
-    <img src="home.png" alt="Strona główna" /></a>
-    <img src="znak.png" alt="Obliczenia" /></a>
-    <a href="index.html">powrot</a>
-  </nav>
+<header>
+  <h1>Całodobowa stacja paliw</h1>
+</header>
 
-  <main>
-    <section id="lewy">
-      <h2>Orientacyjny koszt paliwa</h2>
-      <h2>Cena paliwa dzis za litr:</h2>
-      <p>95 - 6.80zł
-         ON - 7.30zł
-      </p>
-     
-      <form>
-        <label for="rodzaj">Rodzaj paliwa (1-Benzyna 95, 2-ON):</label>
-        <input type="number" id="rodzaj" name="rodzaj" min="1" max="2" required />
+<nav>
+  <a href="index.html">Powrót</a>
+</nav>
 
-        <label for="ilosc">ile litrów</label>
-        <input type="number" id="ilosc" name="ilosc" required />
+<main>
 
-        <label for="marka">Wybierz markę samochodu:</label>
-        <select id="marka" name="marka">
-          <option value="lamborghini">lamborghini</option>
-          <option value="audi">Audi</option>
-          <option value="bmw">BMW</option>
-          <option value="porsche">porsche</option>
-          <option value="toyota">Toyota</option>
-        </select>
+  <section id="lewy">
 
-        <button type="button" onclick="oblicz()">OBLICZ</button>
-      </form>
-      <p id="wynik"></p>
-      <p id="podsumowanie"></p> 
-    </section>
+    <h2>Orientacyjny koszt paliwa</h2>
 
-    <section id="prawy">
-      <img id="samochod" src="lamborghini.png" alt="Samochód" />
-    </section>
-  </main>
+    <p>
+      95 - 6.80 zł/l <br>
+      ON - 7.30 zł/l
+    </p>
 
-  <footer>
-    <p>Stacja paliw - cała dobowa obsługa!</p>
-  </footer>
+    <!-- SAMOCHÓD 1 -->
+    <div class="auto">
+      <h2>Samochód 1</h2>
 
-  <script src="main.js"></script>
+      <label>Rodzaj paliwa:</label>
+      <input type="number" id="rodzaj1" min="1" max="2">
 
-  <script>
-    document.getElementById('marka').addEventListener('change', function() {
-      var marka = this.value;
-      var samochodImg = document.getElementById('samochod');
+      <label>Ilość litrów:</label>
+      <input type="number" id="ilosc1">
 
-      if (marka === 'lamborghini') {
-        samochodImg.src = 'lamborghini.png';
-      } else if (marka === 'audi') {
-        samochodImg.src = 'audi.png';  
-      } else if (marka === 'bmw') {
-        samochodImg.src = 'bmw.png';
-      } else if (marka === 'porsche') {
-        samochodImg.src = 'porsche.png';
-      } else if (marka === 'toyota') {
-        samochodImg.src = 'toyota.png';
-      }
-    });
+      <label>Marka:</label>
+      <select id="marka1">
+        <option value="Lamborghini">Lamborghini</option>
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Porsche">Porsche</option>
+        <option value="Toyota">Toyota</option>
+      </select>
+    </div>
 
+    <!-- SAMOCHÓD 2 -->
+    <div class="auto">
+      <h2>Samochód 2</h2>
 
-    function oblicz() {
-      var rodzaj = document.getElementById("rodzaj").value;
-      var ilosc = document.getElementById("ilosc").value;
-      var marka = document.getElementById("marka").value;
-      var cenaZaLitr = 0;
+      <label>Rodzaj paliwa:</label>
+      <input type="number" id="rodzaj2" min="1" max="2">
 
-     
-      if (rodzaj == 1) { 
-        cenaZaLitr = 6.80; 
-      } else if (rodzaj == 2) { 
-        cenaZaLitr = 7.30; 
-      }
+      <label>Ilość litrów:</label>
+      <input type="number" id="ilosc2">
 
-      
-      var koszt = ilosc * cenaZaLitr;
+      <label>Marka:</label>
+      <select id="marka2">
+        <option value="Lamborghini">Lamborghini</option>
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Porsche">Porsche</option>
+        <option value="Toyota">Toyota</option>
+      </select>
+    </div>
 
-     
-      document.getElementById("wynik").innerHTML = "Koszt paliwa: " + koszt.toFixed(2) + " zł";
-      document.getElementById("podsumowanie").innerHTML = "Marka samochodu: " + marka.charAt(0).toUpperCase() + marka.slice(1) + "<br>" +
-        "Rodzaj paliwa: " + (rodzaj == 1 ? "Benzyna" : "Olej napędowy") + "<br>" +
-        "Ilość paliwa: " + ilosc + " litrów<br>" +
-        "Cena za litr: " + cenaZaLitr.toFixed(2) + " zł";
-    }
-  </script>
+    <button onclick="oblicz()">OBLICZ</button>
+
+    <p id="wynik"></p>
+    <p id="podsumowanie"></p>
+
+  </section>
+
+  <section id="prawy">
+    <img id="samochod" src="lamborghini.png" alt="Samochód">
+  </section>
+
+</main>
+
+<footer>
+  <p>Stacja paliw - całodobowa obsługa!</p>
+</footer>
+
+<script>
+
+function policzKoszt(rodzaj, ilosc) {
+
+  let cena = 0;
+
+  if (rodzaj == 1) {
+    cena = 6.80;
+  }
+  else if (rodzaj == 2) {
+    cena = 7.30;
+  }
+
+  return {
+    koszt: ilosc * cena,
+    cena: cena
+  };
+}
+
+function oblicz() {
+
+  // AUTO 1
+  let rodzaj1 = document.getElementById("rodzaj1").value;
+  let ilosc1 = document.getElementById("ilosc1").value;
+  let marka1 = document.getElementById("marka1").value;
+
+  // AUTO 2
+  let rodzaj2 = document.getElementById("rodzaj2").value;
+  let ilosc2 = document.getElementById("ilosc2").value;
+  let marka2 = document.getElementById("marka2").value;
+
+  let auto1 = policzKoszt(rodzaj1, ilosc1);
+  let auto2 = policzKoszt(rodzaj2, ilosc2);
+
+  let suma = auto1.koszt + auto2.koszt;
+
+  document.getElementById("wynik").innerHTML =
+    "<b>Łączny koszt:</b> " + suma.toFixed(2) + " zł";
+
+  document.getElementById("podsumowanie").innerHTML =
+
+    "<h3>Samochód 1</h3>" +
+    "Marka: " + marka1 + "<br>" +
+    "Koszt: " + auto1.koszt.toFixed(2) + " zł<br><br>" +
+
+    "<h3>Samochód 2</h3>" +
+    "Marka: " + marka2 + "<br>" +
+    "Koszt: " + auto2.koszt.toFixed(2) + " zł";
+}
+
+</script>
+
 </body>
 </html>
