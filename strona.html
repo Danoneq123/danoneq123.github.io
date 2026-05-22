@@ -152,22 +152,16 @@
 
     <div id="auta"></div>
 
-    <button onclick="dodajAuto()">
-      + Dodaj samochód
-    </button>
-
-    <button onclick="oblicz()">
-      OBLICZ
-    </button>
+    <button onclick="dodajAuto()">+ Dodaj samochód</button>
+    <button onclick="oblicz()">OBLICZ</button>
 
     <p id="wynik"></p>
-
     <div id="podsumowanie"></div>
 
   </section>
 
   <section id="prawy">
-    <img src="lamborghini.png" alt="Samochód">
+    <img id="samochod" src="lamborghini.png" alt="Samochód">
   </section>
 
 </main>
@@ -184,14 +178,10 @@ function dodajAuto(){
 
   licznikAut++;
 
-  let kontener =
-    document.getElementById("auta");
+  let kontener = document.getElementById("auta");
 
-  let div =
-    document.createElement("div");
-
+  let div = document.createElement("div");
   div.className = "auto";
-
   div.id = "auto" + licznikAut;
 
   div.innerHTML = `
@@ -199,7 +189,6 @@ function dodajAuto(){
     <h2>Samochód ${licznikAut}</h2>
 
     <label>Rodzaj paliwa:</label>
-
     <select id="rodzaj${licznikAut}">
       <option value="1">95</option>
       <option value="2">ON</option>
@@ -207,15 +196,9 @@ function dodajAuto(){
     </select>
 
     <label>Ilość:</label>
-
-    <input
-      type="number"
-      id="ilosc${licznikAut}"
-      placeholder="Litry lub kWh"
-    >
+    <input type="number" id="ilosc${licznikAut}" placeholder="Litry lub kWh">
 
     <label>Marka:</label>
-
     <select id="marka${licznikAut}">
       <option>Lamborghini</option>
       <option>Audi</option>
@@ -226,22 +209,48 @@ function dodajAuto(){
       <option>Mercedes</option>
     </select>
 
-    <button
-      class="usun"
-      onclick="usunAuto(${licznikAut})"
-    >
-      Usuń samochód
+    <button class="usun" onclick="usunAuto(${licznikAut})">
+      Usuń
     </button>
 
   `;
 
   kontener.appendChild(div);
+
+  podlaczZmianeObrazka(licznikAut);
+}
+
+function podlaczZmianeObrazka(id){
+
+  let select = document.getElementById("marka" + id);
+
+  select.addEventListener("change", function(){
+
+    zmienObraz(this.value);
+
+  });
+}
+
+function zmienObraz(marka){
+
+  let img = document.getElementById("samochod");
+
+  let mapa = {
+    Lamborghini: "lamborghini.png",
+    Audi: "audi.png",
+    BMW: "bmw.png",
+    Porsche: "porsche.png",
+    Toyota: "toyota.png",
+    Tesla: "tesla.png",
+    Mercedes: "mercedes.png"
+  };
+
+  img.src = mapa[marka] || "lamborghini.png";
 }
 
 function usunAuto(id){
 
-  let auto =
-    document.getElementById("auto" + id);
+  let auto = document.getElementById("auto" + id);
 
   if(auto){
     auto.remove();
@@ -252,8 +261,7 @@ function usunAuto(id){
 
 function odswiezNumeracje(){
 
-  let auta =
-    document.querySelectorAll("#auta .auto");
+  let auta = document.querySelectorAll("#auta .auto");
 
   let numer = 1;
 
@@ -264,23 +272,19 @@ function odswiezNumeracje(){
     auto.querySelector("h2").innerHTML =
       "Samochód " + numer;
 
-    let selectRodzaj =
-      auto.querySelector("select[id^='rodzaj']");
+    auto.querySelector("select[id^='rodzaj']").id = "rodzaj" + numer;
+    auto.querySelector("input[id^='ilosc']").id = "ilosc" + numer;
 
-    let inputIlosc =
-      auto.querySelector("input[id^='ilosc']");
-
-    let selectMarka =
-      auto.querySelector("select[id^='marka']");
-
-    selectRodzaj.id = "rodzaj" + numer;
-    inputIlosc.id = "ilosc" + numer;
-    selectMarka.id = "marka" + numer;
+    let marka = auto.querySelector("select[id^='marka']");
+    marka.id = "marka" + numer;
 
     auto.querySelector(".usun").setAttribute(
       "onclick",
       "usunAuto(" + numer + ")"
     );
+
+    // naprawiamy event listener po renumeracji
+    podlaczZmianeObrazka(numer);
 
     numer++;
   });
@@ -294,91 +298,61 @@ function policzKoszt(rodzaj,ilosc){
   let typ = "";
 
   if(rodzaj == 1){
-
     cena = 6.80;
     typ = "95";
   }
-
   else if(rodzaj == 2){
-
     cena = 7.30;
     typ = "ON";
   }
-
   else if(rodzaj == 3){
-
     cena = 1.89;
     typ = "Prąd";
   }
 
-  return{
-    koszt:ilosc * cena,
-    cena:cena,
-    typ:typ
+  return {
+    koszt: ilosc * cena,
+    cena: cena,
+    typ: typ
   };
 }
 
 function oblicz(){
 
   let suma = 0;
-
   let podsumowanie = "";
 
   for(let i=1;i<=licznikAut;i++){
 
-    let rodzaj =
-      document.getElementById("rodzaj" + i).value;
+    let auto = document.getElementById("auto" + i);
+    if(!auto) continue;
 
-    let ilosc =
-      document.getElementById("ilosc" + i).value;
+    let rodzaj = document.getElementById("rodzaj" + i).value;
+    let ilosc = document.getElementById("ilosc" + i).value;
+    let marka = document.getElementById("marka" + i).value;
 
-    let marka =
-      document.getElementById("marka" + i).value;
-
-    let dane =
-      policzKoszt(rodzaj,ilosc);
+    let dane = policzKoszt(rodzaj,ilosc);
 
     suma += dane.koszt;
 
     podsumowanie += `
-
       <div class="auto">
-
         <h3>Samochód ${i}</h3>
-
         Marka: ${marka}<br>
-
-        Rodzaj paliwa:
-        ${dane.typ}<br>
-
-        Ilość:
-        ${ilosc}
-        ${rodzaj == 3 ? "kWh" : "l"}<br>
-
-        Cena jednostkowa:
-        ${dane.cena} zł<br>
-
-        Koszt:
-        ${dane.koszt.toFixed(2)} zł
-
+        Rodzaj: ${dane.typ}<br>
+        Ilość: ${ilosc}<br>
+        Koszt: ${dane.koszt.toFixed(2)} zł
       </div>
-
     `;
   }
 
   document.getElementById("wynik").innerHTML =
+    "<b>Łączny koszt:</b> " + suma.toFixed(2) + " zł";
 
-    "<b>Łączny koszt:</b> " +
-
-    suma.toFixed(2) +
-
-    " zł";
-
-  document.getElementById("podsumowanie").innerHTML =
-    podsumowanie;
+  document.getElementById("podsumowanie").innerHTML = podsumowanie;
 }
 
-// auta startowe
+// start
 dodajAuto();
 dodajAuto();
 
